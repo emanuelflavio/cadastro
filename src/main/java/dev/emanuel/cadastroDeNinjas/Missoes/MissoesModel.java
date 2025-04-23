@@ -3,6 +3,8 @@ package dev.emanuel.cadastroDeNinjas.Missoes;
 import dev.emanuel.cadastroDeNinjas.Ninjas.NinjaModel;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "tb_missoes")
 public class MissoesModel {
@@ -12,7 +14,10 @@ public class MissoesModel {
     private Long id;
     private String nomeDaMissao;
     private rankMissoes rankMissoes;
-    private NinjaModel ninja;
+
+    // Uma missao pode ter varios ninjas
+    @OneToMany(mappedBy = "missoes")
+    private List<NinjaModel> ninja;
 
     public MissoesModel() {
     }
