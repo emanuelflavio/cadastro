@@ -1,4 +1,0 @@
-package dev.emanuel.cadastroDeNinjas.Ninjas;
-
-public class NinjaRepository {
-}
