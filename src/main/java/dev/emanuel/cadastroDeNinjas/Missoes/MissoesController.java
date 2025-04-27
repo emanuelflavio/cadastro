@@ -3,12 +3,12 @@ package dev.emanuel.cadastroDeNinjas.Missoes;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("missoes")
+@RequestMapping("/missoes")
 public class MissoesController {
 
     // POST -- Mandar uma requisição para CRIAR uma missão
     // Criar uma missão
-    @PostMapping('/criar')
+    @PostMapping("/criar")
     public String criarMissao(){
         return "Criado com sucesso!";
     }
