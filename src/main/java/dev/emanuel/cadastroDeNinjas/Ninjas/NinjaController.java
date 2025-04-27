@@ -3,7 +3,7 @@ package dev.emanuel.cadastroDeNinjas.Ninjas;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping
+@RequestMapping("ninjas")
 public class NinjaController {
 
     @GetMapping("/boasvindas")
@@ -18,7 +18,7 @@ public class NinjaController {
     }
 
     // Mostrar Ninja por ID(READ)
-    @GetMapping("/ninjaID")
+    @GetMapping("/mostrarPorId")
     public String ninjaID(){
         return "Ninja ID";
     }
@@ -30,13 +30,13 @@ public class NinjaController {
     }
 
     // Alterar dados dos Ninjas(UPDATE)
-    @PutMapping("/editarNinja")
+    @PutMapping("/alterar")
     public String editarNinja(){
         return "Editado com sucesso!";
     }
 
     // Deletar Ninja(DELETE)
-    @DeleteMapping("/deletarID")
+    @DeleteMapping("/apagar")
     public String apagarNinjaPorId(){
         return "Apagado com sucesso!";
     }
