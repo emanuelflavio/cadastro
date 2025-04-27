@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/ninjas")
@@ -27,13 +28,13 @@ public class NinjaController {
     }
 
     // Mostrar Ninja por ID(READ)
-    @GetMapping("/mostrarPorId")
-    public String ninjaID(){
-        return "Ninja ID";
+    @GetMapping("/listar/{id}")
+    public NinjaModel listarNinjaPorId(@PathVariable Long id){
+        return ninjaService.listarNinjaPorId(id);
     }
 
     // Mostrar todos os ninjas(READ)
-    @GetMapping("/todos")
+    @GetMapping("/listar")
     public List<NinjaModel> mostrarNinjas(){
         return ninjaService.mostrarNinjas();
     }
