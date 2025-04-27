@@ -1,10 +1,19 @@
 package dev.emanuel.cadastroDeNinjas.Ninjas;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("ninjas")
+@RequestMapping("/ninjas")
 public class NinjaController {
+
+    private NinjaService ninjaService;
+
+    public NinjaController(NinjaService ninjaService) {
+        this.ninjaService = ninjaService;
+    }
 
     @GetMapping("/boasvindas")
     public String boasVindas(){
@@ -25,8 +34,8 @@ public class NinjaController {
 
     // Mostrar todos os ninjas(READ)
     @GetMapping("/todos")
-    public String mostrarNinjas(){
-        return "Lista de ninjas";
+    public List<NinjaModel> mostrarNinjas(){
+        return ninjaService.mostrarNinjas();
     }
 
     // Alterar dados dos Ninjas(UPDATE)
