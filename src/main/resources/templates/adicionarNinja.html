@@ -1,0 +1,116 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Document</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            color: #34495e;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccd1d9;
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            background-color: #3498db;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .mensagem {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #dff0d8;
+            color: #3c763d;
+            border: 1px solid #d6e9c6;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<h1>Adicionar Ninja</h1>
+<div class="form-container">
+    <div th:if="${mensagem}" class="mensagem" th:text="${mensagem}"></div>
+    <form th:action="@{/ninjas/ui/salvar}" th:object="${ninja}" method="post">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" th:field="*{nome}" required />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" th:field="*{email}" required />
+
+        <label for="imgUrl">imgUrl:</label>
+        <input type="text" id="imgUrl" name="imgUrl" th:field="*{imgUrl}" required />
+
+        <label for="idade">Idade:</label>
+        <input type="number" id="idade" name="idade" th:field="*{idade}" required />
+
+        <label for="ranking">Ranking:</label>
+        <input type="text" id="ranking" name="ranking" th:field="*{ranking}" />
+
+        <label for="missoes">Missões:</label>
+        <input type="text" id="missoes" name="missoes" th:field="*{missoes}" />
+
+        <button type="submit">Salvar</button>
+    </form>
+    <a th:href="@{/ninjas/ui/listar}">Voltar para a lista de ninjas</a>
+</div>
+
+</body>
+</html>
