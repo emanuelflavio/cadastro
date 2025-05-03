@@ -1,6 +1,5 @@
 package dev.emanuel.cadastroDeNinjas.Ninjas;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
