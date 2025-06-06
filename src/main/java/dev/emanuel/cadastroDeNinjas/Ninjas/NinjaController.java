@@ -4,12 +4,15 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.persistence.Column;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/ninjas")
 public class NinjaController {
 
@@ -23,22 +26,22 @@ public class NinjaController {
     @Operation(summary = "Mensagem de boas vindas",
             description = "Essa rota da uma mensagem de boas " +
                     "vindas para quem acessa ela")
-    public String boasVindas(){
+    public String boasVindas() {
         return "Essa é minha primeira mensagem nessa rota";
     }
 
     // Adicionar Ninja (CREATE)
     @PostMapping("/criar")
     @Operation(summary = "Cria um novo ninja",
-    description = "Rota cria um novo ninja e insere no banco de dados")
+            description = "Rota cria um novo ninja e insere no banco de dados")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201",
-            description = "ninja criado com sucesso"),
+                    description = "ninja criado com sucesso"),
             @ApiResponse(responseCode = "400",
-            description = "erro na criação do ninja")
+                    description = "erro na criação do ninja")
     })
     public ResponseEntity<String> criarNinja(@RequestBody NinjaDTO ninja) {
-        NinjaDTO novoNinja =  ninjaService.criarNinja(ninja);
+        NinjaDTO novoNinja = ninjaService.criarNinja(ninja);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Ninja Criada com sucesso! " + novoNinja.getNome() + " (ID): " + novoNinja.getId());
     }
@@ -53,9 +56,9 @@ public class NinjaController {
             @ApiResponse(responseCode = "400",
                     description = "Ninja não encontrado")
     })
-    public ResponseEntity<?> listarNinjaPorId(@PathVariable Long id){
+    public ResponseEntity<?> listarNinjaPorId(@PathVariable Long id) {
         NinjaDTO ninja = ninjaService.listarNinjaPorId(id);
-        if(ninja != null){
+        if (ninja != null) {
             return ResponseEntity.ok(ninja);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -72,7 +75,7 @@ public class NinjaController {
             @ApiResponse(responseCode = "400",
                     description = "erro ao mostrar ninja")
     })
-    public ResponseEntity<List<NinjaDTO>> mostrarNinjas(){
+    public ResponseEntity<List<NinjaDTO>> mostrarNinjas() {
         List<NinjaDTO> ninjas = ninjaService.mostrarNinjas();
         return ResponseEntity.ok(ninjas);
     }
@@ -93,7 +96,7 @@ public class NinjaController {
             @Parameter(description = "Usuario manda os dados do ninja a ser atualizado no corpo da requisição")
             @RequestBody NinjaDTO ninjaAtualizado) {
         NinjaDTO ninja = ninjaService.editarNinja(id, ninjaAtualizado);
-        if(ninja != null){
+        if (ninja != null) {
             return ResponseEntity.ok(ninja);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -110,16 +113,14 @@ public class NinjaController {
             @ApiResponse(responseCode = "400",
                     description = "erro na deleção do ninja")
     })
-    public ResponseEntity<String> apagarNinjaPorId(@PathVariable Long id){
-        if(ninjaService.listarNinjaPorId(id) != null){
+    public ResponseEntity<String> apagarNinjaPorId(@PathVariable Long id) {
+        if (ninjaService.listarNinjaPorId(id) != null) {
             ninjaService.apagarNinjaPorId(id);
             return ResponseEntity.ok("Ninja com id: " + id + " apagado com sucesso!");
         }
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("O ninja com o id " + id + " não foi encontrado!");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("O ninja com o id " + id + " não foi encontrado!");
     }
-
-
 
 
 }
