@@ -18,6 +18,7 @@ public class NinjaService {
         this.ninjaMapper = ninjaMapper;
     }
 
+
     // Listar todos os meus ninjas
     public List<NinjaDTO> mostrarNinjas(){
         List<NinjaModel> ninjas = ninjaRepository.findAll();
